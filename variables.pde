@@ -1,0 +1,161 @@
+//HOW TO IMPORT SOUND ON PROCESSING
+//Sketch -> import library -> Manage Libraries -> search "Sound"
+//-> click option "Sound | provides a simple way to work with audio" and then click install
+import processing.sound.*;
+SoundFile background_music;
+
+//USED THROUGHOUT THE WHOLE PROJECT
+int ARCADE_X;
+int ARCADE_Y = 280;
+int ALPHA_VALUE = 0;
+int ALPHA_CHANGE = 5;
+int LEVEL_COUNT = -4;//this variable is going to determine which scenes are going to play
+int SECOND_LEVEL_COUNT =0;//this variable is going to also determine which scenes are used (but the difference is that it is determining which scenes whilst having a tetris fall background (yes, it has a name))
+int SOUND_START = 0;
+int BLACK_SCREEN_Y = -400;
+//BACKGROUND VARIABLES USED FOR THE WHOLE PROJECT
+int TETRIS_FALL_START = 0;//tetris fall start variable ->
+int TETRIS_VELOCITY1,TETRIS_VELOCITY2,TETRIS_VELOCITY3,TETRIS_VELOCITY4;
+int TETRIS_INDEX1, TETRIS_INDEX2,TETRIS_INDEX3,TETRIS_INDEX4;
+int TETRIS_START1,TETRIS_START2,TETRIS_START3,TETRIS_START4;
+int TETRIS_START1_X,TETRIS_START1_Y= -600,TETRIS_START2_X,TETRIS_START2_Y= -600,TETRIS_START3_X,TETRIS_START3_Y= -600,TETRIS_START4_X,TETRIS_START4_Y = -600;
+//SCENE -3 - 0 Variables
+int HIDE_X = 0;
+
+float Y_AXIS_POSITION = 580; // the y-coordinate of the character
+float Y_AXIS_VELOCITY = -10; // the vertical velocity of the character
+float GRAVITY = 0.5; // the force of GRAVITY
+
+//SCENE 1 -3 Variables 
+float FALLING_TETRIS_COLORS = 0;
+color FALLING_TETRIS_COLOR;
+int MOVING_TETRIS_BLOCK_X = 400;
+int MOVING_TETRIS_BLOCK_Y = 0;
+int INTRO_SCREEN_Y_AXIS_SPEED = 30;
+int MOVING_START_BLOCK = 100;
+int TEMP_TETRIS_TIMER = 0;
+
+//SCENE 4 variables
+int TRANSITION_BALL_SIZE = 10;
+int MOVING_BLOCK_TEMP = 0;
+
+//SCENE 5 variables
+int TETRIS_GROUND_SETUP = 900;
+int TETRIS_SKY_SETUP = 0;
+int RED_BALL_APPEAR = 0;
+int RED_BALL_FRICTION = 30;
+int YELLOW_BALL_APPEAR = 0;
+int YELLOW_FRICTION = 33;
+int GREEN_BALL_APPEAR = 0;
+int GREEN_FRICTION = 36;
+int BLUE_BALL_APPEAR = 0;
+int BLUE_FRICTION = 27;
+int PURPLE_BALL_APPEAR = 0;
+int PURPLE_FRICTION = 24;
+int HOUSE_BALL_APPEAR_COUNT = -2;
+
+//VARIABLES FOR 100M SPRINT
+int STARTLIGHT_Y = -100;
+int STARTLIGHT_COUNT = 80;
+int STARTLIGHT_COLOR = 0;
+int STARTLIGHT_X = 200;
+int HUNDRED_METER_START = 0;
+int HUNDRED_METER_GROUND_MOVE = 0;
+int HUNDREDM_CROWD_MOVE = 1200;
+int CROWD_MOVE_X = 1500;
+int CROWD_MOVE_X2 = 2000;
+int CROWD_MOVE_X3 = 2500;
+int HOUSE_COLOR_COUNT = 0;
+int HOUSE_NAME_INDEX = 0;
+int HOUSE_COLOR_COUNT2 = 0;
+int HOUSE_NAME_INDEX2 = 0;
+int HOUSE_COLOR_COUNT3 = 0;
+int HOUSE_NAME_INDEX3 = 0;
+int POST_SIGN_MOVE = 1200;
+String POST_SIGN_TEXT = "0";
+
+int HUNDRED_METER_RED_SPEED = 1; 
+int HUNDRED_METER_YELLOW_SPEED = 1; 
+float HUNDRED_METER_GREEN_SPEED = 2; 
+float HUNDRED_METER_BLUE_SPEED = 2; 
+float HUNDRED_METER_PURPLE_SPEED = -1.5;
+int HUNDRED_METER_INDEX = 0;
+int NEON_SIGN_BUZZ_TIME = 200;
+int NEON_SIGN_X_AXIS = 1500;
+int NEON_SIGN_INDEX = 0;
+int NEON_SIGN_X_AXIS_HIDE = 0;
+
+int TRANSITION_START = 0;
+int TRANSITION_BAR1_X_AXIS = 1200;
+int TRANSITION_HIGHJUMP_MOVE;
+int TRANSITION_BAR2_X = 1200;
+int TRANSITION_LONGJUMP_MOVE;
+int TRANSITION_BAR3_X = 1200;
+
+
+//VARIABLES FOR HIGH JUMP SCENE
+int HIGHJUMP_METER_MOVE;
+int HIGHJUMP_SPAWN;
+int HIGHJUMP_SPAWN_INDEX;
+int HIGHJUMP_SPAWN_Y;
+int HIGHJUMP_SPAWN_X = 1100;
+int HIGHJUMP_COLOR;
+int HIGHJUMP_REACT = 0;
+int HIGHJUMP_REACT_VELOCITY = 50;
+
+//PAC-MAN VARIABLES (PART OF HIGH-JUMP)
+int PAC_MAN_X_AXIS = -300;
+int PAC_MAN_VELOCITY = 5;
+
+//LONG JUMP VARIABLES
+int LONGJUMP_MOVE;
+int LONGJUMP_FLOATING_ISLAND_AXIS_X = 2400;
+int LONGJUMP_COUNT = 0;
+
+//JAVELIN VARIABLES
+int RED_BALL_DROP = 150;
+int RED_BALL_X_AXIS = 100;
+int RED_BALL_DROP_VELOCITY = 5;
+int JAVELIN_SCENE = 0;
+
+//TRANSITION_TO_NORMAL_WORLD VARIABLES
+int YOUTUBE_SCENE_X = -500;
+int LONGJUMP_SCENE_X = -1600;
+int LONGJUMP_SCENE_SAND_X = 2000;
+int LONGJUMP_SCENE_COLOR_INDEX = 0;
+int HIGHJUMP_SCENE_X = -1600;
+int HUNDRED_METER_SCENE_X = -1600;
+
+PVector JAVELIN_POSITION_1; // javelin position
+PVector JAVELIN_VELOCITY_1; // javelin velocity
+PVector JAVELIN_ACCELERATION_1; // javelin acceleration
+PVector JAVELIN_POSITION_2; // javelin position
+PVector JAVELIN_VELOCITY_2; // javelin velocity
+PVector JAVELIN_ACCELERATION_2; // javelin acceleration
+PVector JAVELIN_POSITION_3; // javelin position
+PVector JAVELIN_VELOCITY_3; // javelin velocity
+PVector JAVELIN_ACCELERATION_3; // javelin acceleration
+PVector JAVELIN_POSITION_4; // javelin position
+PVector JAVELIN_VELOCITY_4; // javelin velocity
+PVector JAVELIN_ACCELERATION_4; // javelin acceleration
+float JAVELIN_GRAVITY = 1; // acceleration due to GRAVITY
+float AIR_RESISTANCE = 0.01; // air resistance coefficient
+float JAVELIN_LENGTH = 180; // length of the javelin
+
+//ENDING SCENE
+int ENDING_SCENE_TEXT_Y_AXIS = 0;
+int ENDING_MOUSE_X = 900;
+int ENDING_MOUSE_Y = 900;
+
+int TRACK_Y_AXIS = -400;
+int END_COUNT = 0;
+int END_Y_AXIS = 0;
+int END_Y_AXIS2 = 1000;
+int HIGHJUMP_OBSTACLE_X = 1200;
+int HIGHJUMP_ANIMATION = 1;
+int RAINBOW_MOVE = 900;
+int RAINBOW_SIZE = 10;
+int HUNDRED_METER_END_COUNT = 0;
+
+int TEXT1_MOVE = 1300;
+int TEXT2_MOVE = 1300;
