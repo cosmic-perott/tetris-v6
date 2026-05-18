@@ -9,7 +9,7 @@ This project is a customized, algorithmic Tetris animation built using the Proce
 2. Computer Science Enrichment Week: Featured on showcase displays as a benchmark student use-case of the Processing language, demonstrating how programmatic canvas manipulation can bridge the gap between creative coding and functional UI design.
 
 
-## 🛠️ How It Works (Technical Breakdown)
+## How It Works
 
 The core architecture is built upon the Processing framework (Java-based), utilizing object-oriented principles to handle collision, board state calculation, and rendering pipelines.
 
