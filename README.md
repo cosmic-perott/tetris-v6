@@ -8,4 +8,4 @@ This project is a customized, algorithmic Tetris animation built using the Proce
 2. Computer Science Enrichment Week: Featured on showcase displays as a benchmark student use-case of the Processing language, demonstrating how programmatic canvas manipulation can bridge the gap between creative coding and functional UI design.
 
 
-all code, architecture, object, algorithms built by cosmic-perott for school use in display events
+***all code, architecture, object, algorithms built by cosmic-perott for school use in display events***
